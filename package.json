@@ -6,6 +6,8 @@
   "scripts": {
     "build": "remix build",
     "dev": "remix dev",
+    "generate-client": "PRISMA_CLIENT_ENGINE_TYPE='dataproxy' prisma generate",
+    "migrate": "PRISMA_DB_URL=\"$PRISMA_MIGRATE_URL\" prisma migrate deploy",
     "postinstall": "remix setup node",
     "start": "remix-serve build",
     "test": "echo \"Error: no test specified\" && exit 1"
