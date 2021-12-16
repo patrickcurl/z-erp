@@ -11,36 +11,39 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Apps {
+model App {
   id          String @id @default(cuid())
   domain      String @unique
   description String?
-  context     String?
-  createdAt   DateTime
-  updatedAt   DateTime
+  context        String @default("company")
+  owner        User  @relation(fields: [ownerId], references: [id])
+  ownerId      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
 }
 
-model Users {
+model User {
   id          String @id @default(cuid())
   email       String @unique
   password    String
-  createdAt   DateTime
-  updatedAt   DateTime
+  apps        App[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
 }
 
-model Tokens {
+model Token {
   id          String @id @default(cuid())
   token       String @unique
   userId      String
-  createdAt   DateTime
-  updatedAt   DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
 }
 
-model UserApps {
+model UserApp {
   id          String @id @default(cuid())
   userId      String
   appId       String
   owner       Boolean @default(false)
-  createdAt   DateTime
-  updatedAt   DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
 }
