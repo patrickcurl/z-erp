@@ -42,5 +42,4 @@ model UserApps {
   owner       Boolean @default(false)
   createdAt   DateTime
   updatedAt   DateTime
-  @unique([userId, appId])
 }
